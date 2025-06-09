@@ -1,0 +1,198 @@
+
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import ProductCard from "../components/ProductCard";
+import { getProductsByCategory } from "../data/products";
+import WhatsAppButton from "../components/WhatsAppButton";
+import { Filter, ChevronDown } from "lucide-react";
+
+const Collections = () => {
+  const { category } = useParams<{ category: string }>();
+  const [products, setProducts] = useState([]);
+  const [loading, setIsLoading] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    if (category) {
+      // Simulate loading delay for better UX
+      setTimeout(() => {
+        setProducts(getProductsByCategory(category));
+        setIsLoading(false);
+      }, 800);
+    } else {
+      setIsLoading(false);
+    }
+    // Reset scroll position when category changes
+    window.scrollTo(0, 0);
+  }, [category]);
+
+  const categoryMap: Record<string, string> = {
+    "sherwanis": "Sherwanis",
+    "kurtas": "Kurtas & Sets",
+    "lehengas": "Lehengas",
+    "indo-western": "Indo-Western",
+    "western-formals": "Western Formals",
+    "partywear": "Partywear Dresses",
+    "accessories": "Accessories",
+    "indian": "Indian Wear",
+    "western": "Western Wear",
+    "bridal": "Bridal Collection"
+  };
+
+  const categoryTitle = category ? categoryMap[category] || "Products" : "All Collections";
+  
+  // Banner image based on category
+  const getBannerImage = () => {
+    switch (category) {
+      case "sherwanis":
+        return "https://images.unsplash.com/photo-1631134708577-dc9e4e1d3450?q=80&w=1800&auto=format&fit=crop";
+      case "lehengas":
+        return "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1800&auto=format&fit=crop";
+      case "indo-western":
+        return "https://images.unsplash.com/photo-1621452773781-0453844efd5a?q=80&w=1800&auto=format&fit=crop";
+      case "kurtas":
+        return "https://images.unsplash.com/photo-1610713773560-89559bfc9770?q=80&w=1800&auto=format&fit=crop";
+      case "western-formals":
+        return "https://images.unsplash.com/photo-1622519407650-3df9883f76a5?q=80&w=1800&auto=format&fit=crop";
+      case "partywear":
+        return "https://images.unsplash.com/photo-1612336307429-8a898d10e223?q=80&w=1800&auto=format&fit=crop";
+      case "accessories":
+        return "https://images.unsplash.com/photo-1611652964865-65ea3d32a2a7?q=80&w=1800&auto=format&fit=crop";
+      case "indian":
+        return "https://images.unsplash.com/photo-1631134708577-dc9e4e1d3450?q=80&w=1800&auto=format&fit=crop";
+      case "western":
+        return "https://images.unsplash.com/photo-1622519407650-3df9883f76a5?q=80&w=1800&auto=format&fit=crop";
+      case "bridal":
+        return "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1800&auto=format&fit=crop";
+      default:
+        return "https://images.unsplash.com/photo-1631134708577-dc9e4e1d3450?q=80&w=1800&auto=format&fit=crop";
+    }
+  };
+
+  return (
+    <div className="min-h-screen w-full">
+      <div 
+        className="relative h-[40vh] bg-center bg-cover flex items-center justify-center"
+        style={{ backgroundImage: `url(${getBannerImage()})` }}
+      >
+        <div className="absolute inset-0 bg-hibhana-black/60"></div>
+        <div className="relative z-10 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-hibhana-ivory mb-4 font-playfair">
+            {categoryTitle}
+          </h1>
+          <div className="h-1 w-24 mx-auto bg-hibhana-gold"></div>
+          <p className="text-hibhana-ivory/90 mt-4 max-w-xl mx-auto px-4">
+            Discover our exquisite collection of {categoryTitle.toLowerCase()}, crafted with passion and precision.
+          </p>
+        </div>
+      </div>
+
+      <div className="container mx-auto py-8">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-playfair">{products.length} Products</h2>
+          <button 
+            onClick={() => setShowFilters(!showFilters)}
+            className="flex items-center gap-2 px-4 py-2 border rounded-md hover:bg-muted/50 transition-colors"
+          >
+            <Filter size={18} />
+            Filters
+            <ChevronDown size={18} className={`transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+          </button>
+        </div>
+        
+        {showFilters && (
+          <div className="bg-muted/20 p-4 rounded-md mb-8 animate-fade-in">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">Size</label>
+                <select className="w-full border rounded-md p-2">
+                  <option>All Sizes</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Color</label>
+                <select className="w-full border rounded-md p-2">
+                  <option>All Colors</option>
+                  <option>Red</option>
+                  <option>Blue</option>
+                  <option>Green</option>
+                  <option>Black</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Price</label>
+                <select className="w-full border rounded-md p-2">
+                  <option>All Prices</option>
+                  <option>Under ₹10,000</option>
+                  <option>₹10,000 - ₹30,000</option>
+                  <option>₹30,000 - ₹50,000</option>
+                  <option>Above ₹50,000</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Sort By</label>
+                <select className="w-full border rounded-md p-2">
+                  <option>Newest</option>
+                  <option>Price: Low to High</option>
+                  <option>Price: High to Low</option>
+                  <option>Popularity</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="animate-pulse">
+                <div className="bg-muted h-[350px] w-full rounded-md mb-4"></div>
+                <div className="bg-muted h-6 w-3/4 rounded mb-2"></div>
+                <div className="bg-muted h-4 w-1/4 rounded"></div>
+              </div>
+            ))}
+          </div>
+        ) : products.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-lg text-muted-foreground">No products found in this category.</p>
+            <Link to="/collections/indian" className="btn-primary mt-6">
+              View All Collections
+            </Link>
+          </div>
+        )}
+      </div>
+      
+      <section className="bg-muted/30 py-16">
+        <div className="container mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 font-playfair">
+            Looking for something specific?
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Contact us for personalized assistance or to schedule an appointment for a custom fitting.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link to="/appointment" className="btn-primary">
+              Book Appointment
+            </Link>
+            <Link to="/contact" className="btn-outline">
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </section>
+      
+      <WhatsAppButton />
+    </div>
+  );
+};
+
+export default Collections;
