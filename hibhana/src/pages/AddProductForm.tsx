@@ -21,6 +21,8 @@ type ProductFormData = {
 
 export function AddProductForm() {
   const { categories } = useCategories();
+  console.log("Categories from context:", categories);    // added this line for debugging
+
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [imageUploading, setImageUploading] = useState(false);
@@ -35,39 +37,52 @@ export function AddProductForm() {
   });
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files?.[0]) return;
-    
-    const file = e.target.files[0];
-    setImageUploading(true);
-    
-    try {
-      const url = 'https://api.cloudinary.com/v1_1/dkthq8qoy/image/upload';
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', 'Hibana');
+  if (!e.target.files?.[0]) return;
+  
+  const file = e.target.files[0];
+  setImageUploading(true);
+
+  try {
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+    const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
       
-      const response = await axios.post(url, formData);
-      
-      setFormData(prev => ({
-        ...prev,
-        image: response.data.secure_url,
-        imagePublicId: response.data.public_id
-      }));
-      
-      toast({
-        title: 'Image uploaded successfully',
-        description: 'The image has been uploaded to Cloudinary.',
-      });
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error uploading image',
-        description: 'Please try again later.',
-      });
-    } finally {
-      setImageUploading(false);
-    }
-  };
+    if (!cloudName || !uploadPreset) {
+  toast({
+    variant: 'destructive',
+    title: 'Missing environment config',
+    description: 'Cloudinary config is missing. Check your .env file.',
+  });
+  setImageUploading(false);
+  return;
+}
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+
+    const uploadData = new FormData();
+    uploadData.append("file", file);
+    uploadData.append("upload_preset", uploadPreset);
+
+    const response = await axios.post(url, uploadData);
+
+    setFormData(prev => ({
+      ...prev,
+      image: response.data.secure_url,
+      imagePublicId: response.data.public_id
+    }));
+
+    toast({
+      title: 'Image uploaded successfully',
+      description: 'The image has been uploaded to Cloudinary.',
+    });
+  } catch (error) {
+    toast({
+      variant: 'destructive',
+      title: 'Error uploading image',
+      description: 'Please try again later.',
+    });
+  } finally {
+    setImageUploading(false);
+  }
+};
 
   const handleDeleteImage = () => {
     setFormData(prev => ({

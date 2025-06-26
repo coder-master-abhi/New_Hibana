@@ -3,7 +3,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ProductProvider } from "./context/ProductContext";
 
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
@@ -16,6 +15,10 @@ import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 
+import { ProductProvider } from "./context/ProductContext";
+import { CategoryProvider } from "./context/CategoryContext";
+import { CampaignProvider } from "./context/CampaignContext";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -25,7 +28,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Customer UI routes (wrapped in Layout, which now uses <Outlet />) */}
+          {/* Customer UI routes (wrapped in Layout) */}
           <Route path="/" element={<Layout />}>
             <Route index element={<Index />} />
             <Route path="collections/:category" element={<Collections />} />
@@ -35,9 +38,21 @@ const App = () => (
             <Route path="appointment" element={<Appointment />} />
             <Route path="*" element={<NotFound />} />
           </Route>
-          {/* Admin UI routes (not wrapped in Layout) */}
+
+          {/* Admin UI routes (wrapped with all required providers) */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<ProductProvider><AdminDashboard /></ProductProvider>} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProductProvider>
+                <CategoryProvider>
+                  <CampaignProvider>
+                    <AdminDashboard />
+                  </CampaignProvider>
+                </CategoryProvider>
+              </ProductProvider>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

@@ -31,6 +31,7 @@ export function CategoryProvider({ children }: { children: ReactNode }) {
         id: doc.id,
         ...doc.data(),
       })) as Category[];
+      console.log("Fetched from Firestore:", categoriesData);         //added this line for debugging
       setCategories(categoriesData);
     } catch (err) {
       setError('Failed to fetch categories');
