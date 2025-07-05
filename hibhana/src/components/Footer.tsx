@@ -68,7 +68,7 @@ const Footer = () => {
                 { name: "Home", path: "/" },
                 { name: "Indian Wear", path: "/collections/indian" },
                 { name: "Western Wear", path: "/collections/western" },
-                { name: "Bridal Collection", path: "/collections/bridal" },
+                // { name: "Bridal Collection", path: "/collections/bridal" },
                 { name: "About Us", path: "/about" },
                 { name: "Contact", path: "/contact" },
               ].map((link) => (
@@ -95,7 +95,7 @@ const Footer = () => {
               {[
                 { name: "Sherwanis", path: "/collections/sherwanis" },
                 { name: "Kurtas & Sets", path: "/collections/kurtas" },
-                { name: "Lehengas", path: "/collections/lehengas" },
+                // { name: "Lehengas", path: "/collections/lehengas" },
                 { name: "Indo-Western", path: "/collections/indo-western" },
                 { name: "Western Formals", path: "/collections/western-formals" },
                 { name: "Accessories", path: "/collections/accessories" },

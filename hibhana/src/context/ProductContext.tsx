@@ -7,9 +7,12 @@ type Product = {
   price: number;
   category: string;
   featured: boolean;
+  collections: boolean;
+  collectionType?: string;
+  description?: string;
   image: string;
-  imagePublicId: string;
 };
+
 
 type ProductContextType = {
   products: Product[];

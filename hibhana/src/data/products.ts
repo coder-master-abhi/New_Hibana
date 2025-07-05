@@ -62,24 +62,27 @@ export const products: Product[] = [
     sizes: ["38", "40", "42", "44", "46"],
     fabric: "Silk Blend"
   },
-  
-  // Lehengas
+   
+  // jackets/bla
+
   {
-    id: "lehenga-1",
-    name: "Bridal Red Embroidered Lehenga",
-    price: 75000,
-    description: "Stunning red bridal lehenga with traditional zari work and modern silhouette.",
-    details: [
-      "Intricate handwork embroidery",
-      "Premium raw silk fabric",
-      "Comes with matching dupatta",
-      "Custom fitting available"
-    ],
+    id: "casual-jacket-set-1",
+name: "Smart Casual Blazer Set",
+price: 18500,
+description: "A versatile casual blazer outfit that combines comfort and clean style, ideal for semi-formal outings or social gatherings.",
+details: [
+  "Lightweight fabric with flexible fit",
+  "Includes blazer and coordinated chinos",
+  "Easy to pair with shirts or t-shirts",
+  "Designed for all-day comfort and movement"
+],
+
     images: [
-      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1800&auto=format&fit=crop"
+      "https://plus.unsplash.com/premium_photo-1723485701093-cc45f51fdb37?q=80&w=763&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://plus.unsplash.com/premium_photo-1722859257838-1118e9202296?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D"
     ],
-    category: "lehengas",
+    category: "Suit",
+
     featured: true,
     isBestSeller: true,
     rating: 5,
@@ -87,21 +90,22 @@ export const products: Product[] = [
     fabric: "Raw Silk"
   },
   {
-    id: "lehenga-2",
-    name: "Pastel Pink Embellished Lehenga",
-    price: 68000,
-    description: "Delicate pastel pink lehenga with pearl and crystal embellishments, perfect for modern brides.",
-    details: [
-      "Hand-sewn pearl embellishments",
-      "Premium organza fabric",
-      "Includes designer blouse and dupatta",
-      "Custom fitting available"
-    ],
+   id: "tuxedo-classic-1",
+name: "Tailored Tuxedo Set",
+price: 95000,
+description: "A premium tuxedo set designed for formal events, offering a structured silhouette and elegant details for a powerful presence.",
+details: [
+  "Structured blazer with subtle detailing",
+  "Includes matching trousers and waistcoat",
+  "Premium wrinkle-resistant fabric",
+  "Available in slim, regular, and custom fits"
+]
+,
     images: [
-      "https://images.unsplash.com/photo-1594387310549-90a3b0b7a687?q=80&w=1800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1594387310549-90a3b0b7a687?q=80&w=1800&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1592878897400-43fb1f1cc324?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://media.istockphoto.com/id/1339026529/photo/attractive-businessman-closing-his-tux-holding-one-hand-in-pocket.webp?a=1&s=612x612&w=0&k=20&c=OSMEE7X0pIiYTQ7o_zxXhWBrBRRYqO3axgNtF67RxAE="
     ],
-    category: "lehengas",
+    category: "indo-western",
     featured: true,
     isNew: true,
     rating: 4.8,

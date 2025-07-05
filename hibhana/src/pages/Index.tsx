@@ -31,14 +31,14 @@ const Index = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="overflow-hidden rounded-lg">
                   <img 
-                    src="https://images.unsplash.com/photo-1631134708577-dc9e4e1d3450?q=80&w=800&auto=format&fit=crop" 
+                    src="https://lh3.googleusercontent.com/proxy/_ecxAqESy7Sqy22Yf17xG8VPPd4Xx2dp6OxZySRy-pjkomg12Sh17J7iSuTwiAta2_S8j0eVa5Y3wD-WksefDQ4JrX2jbpJLhDR5wT_3Q-rgCm878lm3elFoS0Q3Eny7EWba2mPHKJAMnFkWA2xwMoojDZ8OiVaUe-x6lQ=s1360-w1360-h1020-rw" 
                     alt="Hibhana Collection" 
                     className="w-full h-64 object-cover hover:scale-110 transition-transform duration-700"
                   />
                 </div>
                 <div className="overflow-hidden rounded-lg">
                   <img 
-                    src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=800&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1662833595899-07c57d617f56?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZvcm1hbCUyME1lbidzJTIwQ29sbGVjdGlvbiUyMG91dGZpdHxlbnwwfHwwfHx8MA%3D%3D" 
                     alt="Hibhana Collection" 
                     className="w-full h-64 object-cover hover:scale-110 transition-transform duration-700"
                   />

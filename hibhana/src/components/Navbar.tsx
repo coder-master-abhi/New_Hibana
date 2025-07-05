@@ -8,7 +8,7 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "Indian Wear", href: "/collections/indian" },
   { name: "Western Wear", href: "/collections/western" },
-  { name: "Bridal", href: "/collections/bridal" },
+  // { name: "Bridal", href: "/collections/bridal" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];

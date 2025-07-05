@@ -14,35 +14,35 @@ interface InstagramPost {
 const mockInstagramPosts: InstagramPost[] = [
   {
     id: "1",
-    imageUrl: "https://images.unsplash.com/photo-1631134708577-dc9e4e1d3450?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1715090364409-161e8dd5ab8e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b3V0Zml0JTIwbWVufGVufDB8fDB8fHww",
     link: "https://www.instagram.com/p/1",
     likes: 234,
     comments: 12
   },
   {
     id: "2",
-    imageUrl: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNoaXJ0fGVufDB8fDB8fHww",
     link: "https://www.instagram.com/p/2",
     likes: 189,
     comments: 8
   },
   {
     id: "3",
-    imageUrl: "https://images.unsplash.com/photo-1621452773781-0453844efd5a?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1480429370139-e0132c086e2a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG1hbnxlbnwwfHwwfHx8MA%3D%3D",
     link: "https://www.instagram.com/p/3",
     likes: 312,
     comments: 15
   },
   {
     id: "4",
-    imageUrl: "https://images.unsplash.com/photo-1610713773560-89559bfc9770?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1543132220-4bf3de6e10ae?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGJ1c2luZXNzJTIwbWFufGVufDB8fDB8fHww",
     link: "https://www.instagram.com/p/4",
     likes: 156,
     comments: 7
   },
   {
     id: "5",
-    imageUrl: "https://images.unsplash.com/photo-1612336307429-8a898d10e223?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHNoaXJ0fGVufDB8fDB8fHww",
     link: "https://www.instagram.com/p/5",
     likes: 278,
     comments: 11

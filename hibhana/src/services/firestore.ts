@@ -1,9 +1,21 @@
 import { db } from '../lib/firebase';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 
+// ✅ Define type for Product
+export type Product = {
+  name: string;
+  price: number;
+  category: string;
+  featured: boolean;
+  collections: boolean;
+  collectionType?: string;
+  description?: string;
+  image: string;
+};
+
 
 // Add a new product to the 'products' collection
-export async function addProduct(productData) {
+export async function addProduct(productData: Product): Promise<string> {
   const docRef = await addDoc(collection(db, 'products'), productData);
   return docRef.id;
 }
@@ -18,7 +30,7 @@ export async function addCategory(categoryData) {
 export async function addCampaign(campaignData) {
   const docRef = await addDoc(collection(db, 'campaigns'), campaignData);
   return docRef.id;
-} 
+}
 
 // Delete campaign from the 'campaigns' collection
 export async function deleteCampaign(campaignId) {

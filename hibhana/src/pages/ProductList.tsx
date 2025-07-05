@@ -61,6 +61,9 @@ export default function ProductList({ onEditProduct }: ProductListProps) {
           <TableHead>Price</TableHead>
           <TableHead>Category</TableHead>
           <TableHead>Featured</TableHead>
+          <TableHead>Collections</TableHead> {/* NEW */}
+          <TableHead>Collection Type</TableHead> {/* NEW */}
+          <TableHead>Description</TableHead> {/* NEW */}
           <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
@@ -80,6 +83,11 @@ export default function ProductList({ onEditProduct }: ProductListProps) {
             <TableCell>${Number(product.price).toFixed(2)}</TableCell>
             <TableCell>{product.category}</TableCell>
             <TableCell>{product.featured ? "Yes" : "No"}</TableCell>
+            <TableCell>{product.collections ? "Yes" : "No"}</TableCell> {/* NEW */}
+            <TableCell>{product.collectionType || "—"}</TableCell> {/* NEW */}
+            <TableCell>
+              <div className="max-w-xs truncate">{product.description || "—"}</div>
+            </TableCell> {/* NEW */}
             <TableCell className="space-x-2">
               <Button
                 variant="outline"

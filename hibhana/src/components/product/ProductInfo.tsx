@@ -13,6 +13,10 @@ interface ProductInfoProps {
     isBestSeller?: boolean;
     sizes?: string[];
     fabric?: string;
+    image: string;
+    featured?: boolean;
+    collections?: boolean;
+    collectionType?: string;
   };
 }
 
@@ -22,9 +26,18 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
   return (
     <div className="space-y-8">
+      {/* ✅ Image Display */}
+      <div className="w-full">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full max-h-[500px] object-cover rounded-lg"
+        />
+      </div>
+
       {/* Header Section */}
       <div className="space-y-4">
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {product.isNew && (
             <span className="inline-block bg-gradient-to-r from-hibhana-maroon/90 to-hibhana-maroon text-white text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-sm">
               NEW
@@ -33,6 +46,21 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           {product.isBestSeller && (
             <span className="inline-block bg-gradient-to-r from-hibhana-gold/90 to-hibhana-gold text-hibhana-black text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-sm">
               BEST SELLER
+            </span>
+          )}
+          {product.featured && (
+            <span className="inline-block bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1.5 rounded-full">
+              FEATURED
+            </span>
+          )}
+          {product.collections && (
+            <span className="inline-block bg-pink-100 text-pink-800 text-xs font-medium px-3 py-1.5 rounded-full">
+              COLLECTION
+            </span>
+          )}
+          {product.collectionType && (
+            <span className="inline-block bg-gray-200 text-gray-700 text-xs font-medium px-3 py-1.5 rounded-full">
+              {product.collectionType}
             </span>
           )}
         </div>

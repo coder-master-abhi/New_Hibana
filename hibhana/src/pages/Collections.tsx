@@ -29,14 +29,14 @@ const Collections = () => {
   const categoryMap: Record<string, string> = {
     "sherwanis": "Sherwanis",
     "kurtas": "Kurtas & Sets",
-    "lehengas": "Lehengas",
+    // "lehengas": "Lehengas",
     "indo-western": "Indo-Western",
     "western-formals": "Western Formals",
     "partywear": "Partywear Dresses",
     "accessories": "Accessories",
     "indian": "Indian Wear",
     "western": "Western Wear",
-    "bridal": "Bridal Collection"
+    // "bridal": "Bridal Collection"
   };
 
   const categoryTitle = category ? categoryMap[category] || "Products" : "All Collections";
@@ -45,15 +45,15 @@ const Collections = () => {
   const getBannerImage = () => {
     switch (category) {
       case "sherwanis":
-        return "https://images.unsplash.com/photo-1631134708577-dc9e4e1d3450?q=80&w=1800&auto=format&fit=crop";
-      case "lehengas":
-        return "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1800&auto=format&fit=crop";
+        return "https://images.unsplash.com/photo-1610047402714-307d99a677db?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kaWFuJTIwc2hlcndhbml8ZW58MHx8MHx8fDA%3D";
+      // case "lehengas":
+      //   return "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1800&auto=format&fit=crop";
       case "indo-western":
-        return "https://images.unsplash.com/photo-1621452773781-0453844efd5a?q=80&w=1800&auto=format&fit=crop";
+        return "https://images.unsplash.com/photo-1629186341951-c6e74410bcbc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGluZG8lMjB3ZXN0ZXJuJTIwbWVuJTIwb3V0Zml0fGVufDB8fDB8fHww";
       case "kurtas":
-        return "https://images.unsplash.com/photo-1610713773560-89559bfc9770?q=80&w=1800&auto=format&fit=crop";
+        return "https://imahttps://plus.unsplash.com/premium_photo-1691030256404-05490d501654?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a3VydGElMjBtZW4lMjBvdXRmaXR8ZW58MHx8MHx8fDA%3Dges.unsplash.com/photo-1610713773560-89559bfc9770?q=80&w=1800&auto=format&fit=crop";
       case "western-formals":
-        return "https://images.unsplash.com/photo-1622519407650-3df9883f76a5?q=80&w=1800&auto=format&fit=crop";
+        return "https://imaghttps://images.unsplash.com/photo-1631319557041-c75dced6f9c1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHdlc3Rlcm4lMjBmb3JtYWxzJTIwbWVuJTIwb3V0Zml0fGVufDB8fDB8fHwwes.unsplash.com/photo-1622519407650-3df9883f76a5?q=80&w=1800&auto=format&fit=crop";
       case "partywear":
         return "https://images.unsplash.com/photo-1612336307429-8a898d10e223?q=80&w=1800&auto=format&fit=crop";
       case "accessories":
@@ -62,8 +62,8 @@ const Collections = () => {
         return "https://images.unsplash.com/photo-1631134708577-dc9e4e1d3450?q=80&w=1800&auto=format&fit=crop";
       case "western":
         return "https://images.unsplash.com/photo-1622519407650-3df9883f76a5?q=80&w=1800&auto=format&fit=crop";
-      case "bridal":
-        return "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1800&auto=format&fit=crop";
+      // case "bridal":
+      //   return "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1800&auto=format&fit=crop";
       default:
         return "https://images.unsplash.com/photo-1631134708577-dc9e4e1d3450?q=80&w=1800&auto=format&fit=crop";
     }
