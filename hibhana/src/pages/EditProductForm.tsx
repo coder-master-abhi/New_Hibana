@@ -46,7 +46,7 @@ export default function EditProductForm({ productId, onSuccess }: EditProductFor
       setCategory(product.category || '');
       setFeatured(product.featured || false);
       setImage(product.image || '');
-      setImagePublicId(product.imagePublicId || '');
+      // setImagePublicId(product.imagePublicId || '');
     }
   }, [productId, products]);
 

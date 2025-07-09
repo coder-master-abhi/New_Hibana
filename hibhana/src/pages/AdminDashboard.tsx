@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
 import { Button } from "../components/ui/button";
-import { Label } from "../components/ui/label";
-import { Input } from "../components/ui/input";
-import {
-  Table, TableHeader, TableBody, TableHead, TableRow, TableCell, TableCaption
-} from "../components/ui/table";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "../components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "../components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { CategoryProvider } from "../context/CategoryContext";
 import { CampaignProvider } from "../context/CampaignContext";
@@ -19,15 +14,12 @@ import CampaignList from "./CampaignList";
 import EditCampaignForm from "./EditCampaignForm";
 import ProductList from "./ProductList";
 import EditProductForm from "./EditProductForm";
-   
-import { addCategory, addCampaign } from "../services/firestore";
+import AdminCategoryPage from "./AdminCategoryPage";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [catLoading, setCatLoading] = useState(false);
   const [editCampaignId, setEditCampaignId] = useState<string | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editProductId, setEditProductId] = useState<string | null>(null);
@@ -35,7 +27,6 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchProducts();
-    fetchCategories();
   }, []);
 
   const fetchProducts = async () => {
@@ -47,36 +38,6 @@ const AdminDashboard = () => {
       console.error('Error fetching products:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchCategories = async () => {
-    setCatLoading(true);
-    try {
-      const snap = await getDocs(collection(db, "categories"));
-      setCategories(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    } finally {
-      setCatLoading(false);
-    }
-  };
-
-  const handleDeleteProduct = async (id) => {
-    try {
-      await deleteDoc(doc(db, "products", id));
-      await fetchProducts();
-    } catch (error) {
-      console.error('Error deleting product:', error);
-    }
-  };
-
-  const handleDeleteCategory = async (id) => {
-    try {
-      await deleteDoc(doc(db, "categories", id));
-      await fetchCategories();
-    } catch (error) {
-      console.error('Error deleting category:', error);
     }
   };
 
@@ -106,7 +67,7 @@ const AdminDashboard = () => {
 
             <TabsContent value="products" className="space-y-4">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-semibold">Products</h2>
+                <h2 className="text-2xl font-semibold">Products Management</h2>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button>Add Product</Button>
@@ -146,61 +107,7 @@ const AdminDashboard = () => {
             </TabsContent>
 
             <TabsContent value="categories" className="space-y-4">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-semibold">Categories Management</h2>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button>Add Category</Button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-2xl">
-                    <DialogHeader>
-                      <DialogTitle>Add New Category</DialogTitle>
-                    </DialogHeader>
-                    <form className="space-y-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="title">Title</Label>
-                        <Input id="title" placeholder="Category title" />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="description">Description</Label>
-                        <Input id="description" placeholder="Category description" />
-                      </div>
-                      <Button type="submit" className="w-full">Add Category</Button>
-                    </form>
-                  </DialogContent>
-                </Dialog>
-              </div>
-
-              {catLoading ? (
-                <div className="text-center py-4">Loading categories...</div>
-              ) : (
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Title</TableHead>
-                      <TableHead>Description</TableHead>
-                      <TableHead>Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {categories.map((category) => (
-                      <TableRow key={category.id}>
-                        <TableCell>{category.title}</TableCell>
-                        <TableCell>{category.description}</TableCell>
-                        <TableCell>
-                          <Button
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => handleDeleteCategory(category.id)}
-                          >
-                            Delete
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              )}
+              <AdminCategoryPage />
             </TabsContent>
 
             <TabsContent value="campaigns" className="space-y-4">

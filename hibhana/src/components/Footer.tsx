@@ -68,7 +68,7 @@ const Footer = () => {
                 { name: "Home", path: "/" },
                 { name: "Indian Wear", path: "/collections/indian" },
                 { name: "Western Wear", path: "/collections/western" },
-                // { name: "Bridal Collection", path: "/collections/bridal" },
+                
                 { name: "About Us", path: "/about" },
                 { name: "Contact", path: "/contact" },
               ].map((link) => (
@@ -95,7 +95,7 @@ const Footer = () => {
               {[
                 { name: "Sherwanis", path: "/collections/sherwanis" },
                 { name: "Kurtas & Sets", path: "/collections/kurtas" },
-                // { name: "Lehengas", path: "/collections/lehengas" },
+                
                 { name: "Indo-Western", path: "/collections/indo-western" },
                 { name: "Western Formals", path: "/collections/western-formals" },
                 { name: "Accessories", path: "/collections/accessories" },
@@ -123,9 +123,9 @@ const Footer = () => {
               <p className="flex items-start group">
                 <MapPin size={18} className="mr-3 mt-1 text-hibhana-gold group-hover:scale-110 transition-transform duration-300" />
                 <span className="leading-relaxed">
-                  Hibhana Couture<br />
-                  Hill Road, Bandra West<br />
-                  Mumbai, Maharashtra
+                  Hibhana Couture,<br />
+                  Shop No 7, Opposite Elco Arcade, Near Parison Mens Wear,<br />
+                  Off Hill Road, Boran Road, Bandra West-400050
                 </span>
               </p>
               <p className="flex items-center group">
@@ -134,7 +134,7 @@ const Footer = () => {
                   href="tel:+919876543210"
                   className="hover:text-hibhana-gold transition-all duration-300"
                 >
-                  +91 98765 43210
+                  +91  98192 20622
                 </a>
               </p>
               <p className="flex items-center group">

@@ -11,7 +11,10 @@ type Product = {
   collectionType?: string;
   description?: string;
   image: string;
+  indianWear: boolean;
+  westernWear: boolean;
 };
+
 
 
 type ProductContextType = {

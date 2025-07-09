@@ -14,10 +14,14 @@ import Appointment from "./pages/Appointment";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminCategoryPage from "./pages/AdminCategoryPage";
 
 import { ProductProvider } from "./context/ProductContext";
 import { CategoryProvider } from "./context/CategoryContext";
 import { CampaignProvider } from "./context/CampaignContext";
+
+import IndianWearPage from "./pages/IndianWearPage";
+import WesternWearPage from "./pages/WesternWearPage";
 
 const queryClient = new QueryClient();
 
@@ -27,33 +31,33 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          {/* Customer UI routes (wrapped in Layout) */}
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Index />} />
-            <Route path="collections/:category" element={<Collections />} />
-            <Route path="product/:id" element={<Product />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="appointment" element={<Appointment />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
+        {/* ✅ Wrap ENTIRE app with all needed providers */}
+        <ProductProvider>
+          <CategoryProvider>
+            <CampaignProvider>
+              <Routes>
+                {/* Customer UI routes (wrapped in Layout) */}
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Index />} />
+                  <Route path="collections/:category" element={<Collections />} />
+                  <Route path="product/:id" element={<Product />} />
+                  <Route path="about" element={<About />} />
+                  <Route path="contact" element={<Contact />} />
+                  <Route path="appointment" element={<Appointment />} />
+                  <Route path="indian-wear" element={<IndianWearPage />} /> {/* ✅ Fixed */}
+                  <Route path="western-wear" element={<WesternWearPage />} /> {/* ✅ Fixed */}
+                  <Route path="*" element={<NotFound />} />
+                </Route>
 
-          {/* Admin UI routes (wrapped with all required providers) */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route
-            path="/admin/dashboard"
-            element={
-              <ProductProvider>
-                <CategoryProvider>
-                  <CampaignProvider>
-                    <AdminDashboard />
-                  </CampaignProvider>
-                </CategoryProvider>
-              </ProductProvider>
-            }
-          />
-        </Routes>
+
+                {/* Admin UI routes */}
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route path="/admin/categories" element={<AdminCategoryPage />} />
+              </Routes>
+            </CampaignProvider>
+          </CategoryProvider>
+        </ProductProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

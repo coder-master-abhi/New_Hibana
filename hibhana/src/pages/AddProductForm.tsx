@@ -5,16 +5,26 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Switch } from '../components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../components/ui/select';
 import { useToast } from '../components/ui/use-toast';
+import { Textarea } from '../components/ui/textarea';
 
 type ProductFormData = {
   name: string;
   price: string;
-  category: string;
   featured: boolean;
   collections: boolean;
+  collectionType: string;
+  description: string;
   image: string;
+  indianWear: boolean;
+  westernWear: boolean;
 };
 
 export function AddProductForm() {
@@ -25,15 +35,18 @@ export function AddProductForm() {
   const [formData, setFormData] = useState<ProductFormData>({
     name: '',
     price: '',
-    category: '',
     featured: false,
     collections: false,
-    image: ''
+    collectionType: '',
+    description: '',
+    image: '',
+    indianWear: false,
+    westernWear: false,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.price || !formData.category || !formData.image) {
+    if (!formData.name || !formData.price || !formData.image || !formData.description) {
       toast({
         variant: 'destructive',
         title: 'Missing fields',
@@ -47,6 +60,10 @@ export function AddProductForm() {
       await addProduct({
         ...formData,
         price: parseFloat(formData.price),
+        category: formData.collections
+          ? formData.collectionType.toLowerCase().replace(/\s+/g, '-')
+          : '',
+
       });
 
       toast({
@@ -54,14 +71,16 @@ export function AddProductForm() {
         description: 'The product has been saved to the database.',
       });
 
-      // Reset form
       setFormData({
         name: '',
         price: '',
-        category: '',
         featured: false,
         collections: false,
-        image: ''
+        collectionType: '',
+        description: '',
+        image: '',
+        indianWear: false,
+        westernWear: false,
       });
     } catch (error) {
       toast({
@@ -83,6 +102,7 @@ export function AddProductForm() {
           value={formData.name}
           onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
           placeholder="Enter product name"
+          required
         />
       </div>
 
@@ -95,26 +115,19 @@ export function AddProductForm() {
           onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
           placeholder="Enter price"
           step="0.01"
+          required
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="category">Category</Label>
-        <Select
-          value={formData.category}
-          onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Select a category" />
-          </SelectTrigger>
-          <SelectContent>
-            {categories.map((category) => (
-              <SelectItem key={category.id} value={category.id}>
-                {category.title}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <Label htmlFor="description">Description</Label>
+        <Textarea
+          id="description"
+          value={formData.description}
+          onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+          placeholder="Enter product description"
+          required
+        />
       </div>
 
       <div className="flex items-center space-x-2">
@@ -137,6 +150,52 @@ export function AddProductForm() {
         <Label htmlFor="collections">Show in Collections</Label>
       </div>
 
+      {formData.collections && (
+        <div className="space-y-2">
+          <Label htmlFor="collectionType">Collection Category</Label>
+          <Select
+            value={formData.collectionType}
+            onValueChange={(value) =>
+              setFormData((prev) => ({ ...prev, collectionType: value }))
+            }
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select a collection category" />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map((category) => (
+                <SelectItem key={category.id} value={category.title}>
+                  {category.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
+      {/* 🔴 NEW TOGGLES START HERE */}
+      <div className="flex items-center space-x-2">
+        <Switch
+          id="indianWear"
+          checked={formData.indianWear}
+          onCheckedChange={(checked) =>
+            setFormData((prev) => ({ ...prev, indianWear: checked }))
+          }
+        />
+        <Label htmlFor="indianWear">Show under Indian Wear</Label>
+      </div>
+
+      <div className="flex items-center space-x-2">
+        <Switch
+          id="westernWear"
+          checked={formData.westernWear}
+          onCheckedChange={(checked) =>
+            setFormData((prev) => ({ ...prev, westernWear: checked }))
+          }
+        />
+        <Label htmlFor="westernWear">Show under Western Wear</Label>
+      </div>
+
       <div className="space-y-2">
         <Label htmlFor="image">Image URL</Label>
         <Input
@@ -145,6 +204,7 @@ export function AddProductForm() {
           value={formData.image}
           onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
           placeholder="Paste full image URL here"
+          required
         />
       </div>
 

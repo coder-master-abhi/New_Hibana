@@ -6,12 +6,12 @@ import ThemeToggle from "./ThemeToggle";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Indian Wear", href: "/collections/indian" },
-  { name: "Western Wear", href: "/collections/western" },
-  // { name: "Bridal", href: "/collections/bridal" },
+  { name: "Indian Wear", href: "/indian-wear" }, 
+  { name: "Western Wear", href: "/western-wear" }, // ✅ updated path
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
+// Note: Ensure the paths match your routing setup
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

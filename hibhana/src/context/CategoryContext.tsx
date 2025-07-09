@@ -5,6 +5,8 @@ import { db } from '../lib/firebase';
 type Category = {
   id: string;
   title: string;
+  slug: string;
+  image: string;
   description: string;
 };
 

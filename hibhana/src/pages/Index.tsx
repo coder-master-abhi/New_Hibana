@@ -32,7 +32,7 @@ const Index = () => {
                 <div className="overflow-hidden rounded-lg">
                   <img 
                     src="https://lh3.googleusercontent.com/proxy/_ecxAqESy7Sqy22Yf17xG8VPPd4Xx2dp6OxZySRy-pjkomg12Sh17J7iSuTwiAta2_S8j0eVa5Y3wD-WksefDQ4JrX2jbpJLhDR5wT_3Q-rgCm878lm3elFoS0Q3Eny7EWba2mPHKJAMnFkWA2xwMoojDZ8OiVaUe-x6lQ=s1360-w1360-h1020-rw" 
-                    alt="Hibhana Collection" 
+                    alt="Hibhana Collection"     ///hibhana image
                     className="w-full h-64 object-cover hover:scale-110 transition-transform duration-700"
                   />
                 </div>
@@ -52,7 +52,7 @@ const Index = () => {
       <CategoryGrid />
       <FeaturedProducts />
       
-      <section className="py-16 md:py-24 bg-[url('https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1800&auto=format&fit=crop')] bg-cover bg-center parallax-bg">
+      <section className="py-16 md:py-24 bg-[url('https://lh3.googleusercontent.com/proxy/2rkEoCrGYSdB3Co23tFG_evg2OB6kf5kYdC74solWzShTNHqxZb6wAaLzlwvqjXHWGZae_UFGT3SO6D3RTjytI-dQesDjkRm9Wma86qc-eoHl0tF66LrihJ6jiWJLw95LjZLS38yIHqtZo4hs2EfVPllwhdyEByeXU2BeA=s1360-w1360-h1020-rw')] bg-cover bg-center parallax-bg">
         <div className="container mx-auto">
           <div className="max-w-2xl mx-auto bg-background/90 backdrop-blur-md p-8 md:p-12 rounded-lg text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-playfair">Custom Design Services</h2>

@@ -1,59 +1,13 @@
+import { useCategories } from "../context/CategoryContext";
 import { Link } from "react-router-dom";
 
-interface Category {
-  id: string;
-  title: string;
-  image: string;
-  link: string;
-  description: string;
-}
-
-const categories: Category[] = [
-  {
-    id: "sherwanis",
-    title: "Sherwanis",
-    description: "Luxurious groom attire with intricate embroidery",
-    image: "https://images.unsplash.com/photo-1735052711932-65948042c896?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGluZGlhbiUyMGdyb29tJTIwc2hlcndhbml8ZW58MHx8MHx8fDA%3D",
-    link: "/collections/sherwanis",
-  },
-  {
-    id: "Pathni",
-    title: "Pathani Suits",
-    description: "Comfortable and bold ethnic wear for a confident style statement",
-    image: "https://images.unsplash.com/photo-1634410251313-b65c51944ab3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGF0aGFuaSUyMHN1aXRzfGVufDB8fDB8fHww",
-    link: "/collections/lehengas",
-  },
-  {
-    id: "kurtas",
-    title: "Kurtas & Sets",
-    description: "Elegant everyday and festive traditional wear",
-    image: "https://plus.unsplash.com/premium_photo-1691030256214-dc57034ec935?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8a3VydGFzfGVufDB8fDB8fHww",
-    link: "/collections/kurtas",
-  },
-  {
-    id: "indo-western",
-    title: "Indo-Western",
-    description: "Perfect fusion of traditional and contemporary styles",
-    image: "https://images.unsplash.com/photo-1610271283578-a595c4608e13?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluZG8lMjB3ZXN0ZXJuJTIwY2xvdGhpbmclMjBtYWxlfGVufDB8fDB8fHww",
-    link: "/collections/indo-western",
-  },
-  {
-    id: "western-formals",
-    title: "Western Formals",
-    description: "Sophisticated suits and blazers for every occasion",
-    image: "https://images.unsplash.com/photo-1602622573203-f27d27a3a945?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHdlc3Rlcm4lMjBmb3JtYWx8ZW58MHx8MHx8fDA%3D",
-    link: "/collections/western-formals",
-  },
-  // {
-  //   id: "bridal",
-  //   title: "Bridal Collection",
-  //   description: "Complete wedding ensembles for the perfect celebration",
-  //   image: "https://images.unsplash.com/photo-1593658886759-7bb25d2e521e?q=80&w=800&auto=format&fit=crop",
-  //   link: "/collections/bridal",
-  // },
-];
-
 const CategoryGrid = () => {
+  const { categories, loading } = useCategories();
+
+  if (loading) {
+    return <div className="text-center py-12">Loading categories...</div>;
+  }
+
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-background to-background/95">
       <div className="container mx-auto px-4">
@@ -67,12 +21,12 @@ const CategoryGrid = () => {
             crafted with passion and attention to detail.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category, index) => (
             <Link
               key={category.id}
-              to={category.link}
+              to={`/collections/${category.slug}`}
               className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
@@ -86,17 +40,17 @@ const CategoryGrid = () => {
               </div>
               
               <div className="absolute inset-0 p-6 flex flex-col justify-end transform transition-transform duration-500 group-hover:translate-y-0">
-                <h3 className="text-2xl font-playfair text-white mb-2 transform transition-transform duration-500 group-hover:translate-y-0">
+                <h3 className="text-2xl font-playfair text-white mb-2">
                   {category.title}
                 </h3>
-                <p className="text-white/90 mb-4 text-sm leading-relaxed transform transition-transform duration-500 group-hover:translate-y-0">
+                <p className="text-white/90 mb-4 text-sm leading-relaxed">
                   {category.description}
                 </p>
-                <div className="w-16 h-0.5 bg-gradient-to-r from-hibhana-gold to-hibhana-gold/50 mb-4 transform transition-transform duration-500 group-hover:translate-y-0"></div>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-hibhana-gold to-hibhana-gold/50 mb-4"></div>
                 <span className="inline-flex items-center text-sm font-medium text-white group-hover:text-hibhana-gold transition-colors duration-300">
                   Explore Collection
                   <svg 
-                    className="w-4 h-4 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" 
+                    className="w-4 h-4 ml-2" 
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -114,3 +68,5 @@ const CategoryGrid = () => {
 };
 
 export default CategoryGrid;
+// This component displays a grid of categories with images and titles.
+// It uses the `useCategories` hook to fetch categories from the context.

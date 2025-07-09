@@ -4,9 +4,9 @@ import WhatsAppButton from "../components/WhatsAppButton";
 const About = () => {
   return (
     <div className="min-h-screen w-full">
-      <div 
+      <div
         className="relative h-[40vh] bg-center bg-cover flex items-center justify-center"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1618403323851-e2ceb9401bb1?q=80&w=1800&auto=format&fit=crop')" }}
+        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1618403323851-e2ceb9401bb1?q=80&w=1800&auto=format&fit=crop')" }}  // need to change this image
       >
         <div className="absolute inset-0 bg-hibhana-black/60"></div>
         <div className="relative z-10 text-center">
@@ -35,23 +35,23 @@ const About = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="overflow-hidden rounded-lg">
-                <img 
-                  src="https://images.unsplash.com/photo-1610117238596-8b7185f444f3?q=80&w=800&auto=format&fit=crop" 
-                  alt="Hibhana Collection" 
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1666299746871-46c49692381d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29sbGVjdGlvbnMlMjBvZiUyMG1lbiUyMGNsb3RocyUyMGluJTIwc2hvcHxlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Hibhana Collection"
                   className="w-full h-64 object-cover hover:scale-110 transition-transform duration-700"
                 />
               </div>
               <div className="overflow-hidden rounded-lg">
-                <img 
-                  src="https://images.unsplash.com/photo-1610508500445-a4592435e27e?q=80&w=800&auto=format&fit=crop" 
-                  alt="Hibhana Collection" 
+                <img
+                  src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4npVJzHQqXfl10K8BwcyN_RQl_U-iTjccsxqekzy9UJ-NbH73JqGSFULoNNIpLziQ2CN_6GkUK8jtN1X75yvLClYNYD1rmQYD5KMaXbaRkGPWBe9kfmerqK-_gMXyo_Jlwliv5PB=s1360-w1360-h1020-rw"
+                  alt="Hibhana Collection"
                   className="w-full h-64 object-cover hover:scale-110 transition-transform duration-700"
                 />
               </div>
               <div className="overflow-hidden rounded-lg col-span-2">
-                <img 
-                  src="https://images.unsplash.com/photo-1599288683058-a4d0f2ba2c85?q=80&w=800&auto=format&fit=crop" 
-                  alt="Hibhana Collection" 
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1671469875519-944b48b1520e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29sbGVjdGlvbnMlMjBvZiUyMG1lbiUyMGNsb3RocyUyMGluJTIwc2hvcHxlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Hibhana Collection"
                   className="w-full h-64 object-cover hover:scale-110 transition-transform duration-700"
                 />
               </div>
@@ -66,7 +66,7 @@ const About = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-playfair">Our Craftsmanship</h2>
             <div className="h-1 w-24 mx-auto bg-hibhana-gold"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-background p-8 rounded-lg shadow-md">
               <div className="text-center">
@@ -79,7 +79,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            
+
             <div className="bg-background p-8 rounded-lg shadow-md">
               <div className="text-center">
                 <div className="h-16 w-16 bg-hibhana-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -91,7 +91,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            
+
             <div className="bg-background p-8 rounded-lg shadow-md">
               <div className="text-center">
                 <div className="h-16 w-16 bg-hibhana-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -113,7 +113,7 @@ const About = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-playfair">Visit Our Store</h2>
             <div className="h-1 w-24 mx-auto bg-hibhana-gold"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div className="bg-background p-8 rounded-lg shadow-md">
@@ -124,7 +124,7 @@ const About = () => {
                   <p>Mumbai, Maharashtra</p>
                   <p>India</p>
                 </address>
-                
+
                 <h3 className="text-xl font-bold mt-8 mb-4 font-playfair">Store Hours</h3>
                 <ul className="space-y-2 text-muted-foreground">
                   <li className="flex justify-between">
@@ -140,7 +140,7 @@ const About = () => {
                     <span>11:00 AM - 7:00 PM</span>
                   </li>
                 </ul>
-                
+
                 <div className="mt-8">
                   <a href="/appointment" className="btn-primary block text-center">
                     Book an Appointment
@@ -148,14 +148,14 @@ const About = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="h-[400px] rounded-lg overflow-hidden">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.193681441284!2d72.82232561490055!3d19.05534368709772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8c3b4c05b15%3A0x2e83279560a0c4b6!2sHill%20Rd%2C%20Bandra%20West%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1650385124669!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen 
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.193681441284!2d72.82232561490055!3d19.05534368709772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8c3b4c05b15%3A0x2e83279560a0c4b6!2sHill%20Rd%2C%20Bandra%20West%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1650385124669!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
                 loading="lazy"
                 title="Hibhana Store Location"
               ></iframe>
@@ -163,7 +163,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       <WhatsAppButton />
     </div>
   );

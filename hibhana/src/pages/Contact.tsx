@@ -73,8 +73,8 @@ const Contact = () => {
                     <h3 className="font-medium">Visit Our Store</h3>
                     <address className="not-italic text-muted-foreground">
                       Hibhana Couture<br />
-                      Hill Road, Bandra West<br />
-                      Mumbai, Maharashtra
+                      7, Boran Rd, opp. ELCO Arcade, Santosh Nagar, Hill road<br />
+                       Bandra West, Mumbai, Maharashtra 400050
                     </address>
                   </div>
                 </div>
@@ -83,8 +83,8 @@ const Contact = () => {
                   <Phone className="mr-4 text-hibhana-gold flex-shrink-0 mt-1" size={20} />
                   <div>
                     <h3 className="font-medium">Call Us</h3>
-                    <a href="tel:+919876543210" className="text-muted-foreground hover:text-hibhana-gold">
-                      +91 98765 43210
+                    <a href="tel:+919819220622" className="text-muted-foreground hover:text-hibhana-gold">
+                      +91 98192 20622
                     </a>
                   </div>
                 </div>

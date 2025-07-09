@@ -71,7 +71,7 @@ const InstagramFeed = () => {
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-background/95 to-background">
       <div className="container mx-auto px-4">
-        <div 
+        <div
           className="text-center mb-16"
           style={{
             opacity: 0,
@@ -102,8 +102,8 @@ const InstagramFeed = () => {
         {loading ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {[...Array(6)].map((_, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="aspect-square bg-muted/50 animate-pulse rounded-lg"
                 style={{ animationDelay: `${index * 0.1}s` }}
               ></div>
@@ -152,7 +152,7 @@ const InstagramFeed = () => {
           </div>
         )}
 
-        <div 
+        <div
           className="text-center mt-12"
           style={{
             opacity: 0,
