@@ -6,7 +6,7 @@ const About = () => {
     <div className="min-h-screen w-full">
       <div
         className="relative h-[40vh] bg-center bg-cover flex items-center justify-center"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1618403323851-e2ceb9401bb1?q=80&w=1800&auto=format&fit=crop')" }}  // need to change this image
+        style={{ backgroundImage: "url('https://lh3.googleusercontent.com/proxy/2rkEoCrGYSdB3Co23tFG_evg2OB6kf5kYdC74solWzShTNHqxZb6wAaLzlwvqjXHWGZae_UFGT3SO6D3RTjytI-dQesDjkRm9Wma86qc-eoHl0tF66LrihJ6jiWJLw95LjZLS38yIHqtZo4hs2EfVPllwhdyEByeXU2BeA=s1360-w1360-h1020-rw')" }}  // need to change this image
       >
         <div className="absolute inset-0 bg-hibhana-black/60"></div>
         <div className="relative z-10 text-center">

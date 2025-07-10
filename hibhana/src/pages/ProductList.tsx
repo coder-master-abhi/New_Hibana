@@ -22,6 +22,9 @@ export default function ProductList({ onEditProduct }: ProductListProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const handleDelete = async (productId: string) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+    if (!confirmDelete) return;
+
     try {
       setDeletingId(productId);
       await deleteProduct(productId);

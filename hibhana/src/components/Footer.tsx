@@ -66,9 +66,8 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { name: "Home", path: "/" },
-                { name: "Indian Wear", path: "/collections/indian" },
-                { name: "Western Wear", path: "/collections/western" },
-                
+                { name: "Indian Wear", path: "/indian-wear" },
+                { name: "Western Wear", path: "/western-wear" },
                 { name: "About Us", path: "/about" },
                 { name: "Contact", path: "/contact" },
               ].map((link) => (
@@ -95,7 +94,7 @@ const Footer = () => {
               {[
                 { name: "Sherwanis", path: "/collections/sherwanis" },
                 { name: "Kurtas & Sets", path: "/collections/kurtas" },
-                
+
                 { name: "Indo-Western", path: "/collections/indo-western" },
                 { name: "Western Formals", path: "/collections/western-formals" },
                 { name: "Accessories", path: "/collections/accessories" },
