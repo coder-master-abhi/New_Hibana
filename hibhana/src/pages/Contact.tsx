@@ -23,7 +23,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       toast({
@@ -43,9 +43,9 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen w-full">
-      <div 
+      <div
         className="relative h-[40vh] bg-center bg-cover flex items-center justify-center"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599288683058-a4d0f2ba2c85?q=80&w=1800&auto=format&fit=crop')" }}
+        style={{ backgroundImage: "url('https://www.shutterstock.com/image-vector/contact-us-background-eps-vector-260nw-2491405611.jpg')" }}
       >
         <div className="absolute inset-0 bg-hibhana-black/60"></div>
         <div className="relative z-10 text-center">
@@ -62,10 +62,10 @@ const Contact = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6 font-playfair">Get In Touch</h2>
               <p className="text-muted-foreground mb-8">
-                We'd love to hear from you. Contact us for inquiries about our collections, 
+                We'd love to hear from you. Contact us for inquiries about our collections,
                 custom design services, or to schedule an appointment.
               </p>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start">
                   <MapPin className="mr-4 text-hibhana-gold flex-shrink-0 mt-1" size={20} />
@@ -74,11 +74,11 @@ const Contact = () => {
                     <address className="not-italic text-muted-foreground">
                       Hibhana Couture<br />
                       7, Boran Rd, opp. ELCO Arcade, Santosh Nagar, Hill road<br />
-                       Bandra West, Mumbai, Maharashtra 400050
+                      Bandra West, Mumbai, Maharashtra 400050
                     </address>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <Phone className="mr-4 text-hibhana-gold flex-shrink-0 mt-1" size={20} />
                   <div>
@@ -88,7 +88,7 @@ const Contact = () => {
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <Mail className="mr-4 text-hibhana-gold flex-shrink-0 mt-1" size={20} />
                   <div>
@@ -98,14 +98,14 @@ const Contact = () => {
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <Instagram className="mr-4 text-hibhana-gold flex-shrink-0 mt-1" size={20} />
                   <div>
                     <h3 className="font-medium">Follow Us</h3>
-                    <a 
-                      href="https://www.instagram.com/hibhana_/" 
-                      target="_blank" 
+                    <a
+                      href="https://www.instagram.com/hibhana_/"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-hibhana-gold"
                     >
@@ -114,7 +114,7 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-12">
                 <h3 className="text-xl font-bold mb-4 font-playfair">Store Hours</h3>
                 <ul className="space-y-2 text-muted-foreground">
@@ -133,7 +133,7 @@ const Contact = () => {
                 </ul>
               </div>
             </div>
-            
+
             <div>
               <div className="bg-background rounded-lg shadow-md p-8">
                 <h2 className="text-2xl font-bold mb-6 font-playfair">Send Us a Message</h2>
@@ -152,7 +152,7 @@ const Contact = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="email" className="block mb-2 text-sm font-medium">
@@ -182,7 +182,7 @@ const Contact = () => {
                       />
                     </div>
                   </div>
-                  
+
                   <div>
                     <label htmlFor="subject" className="block mb-2 text-sm font-medium">
                       Subject
@@ -197,7 +197,7 @@ const Contact = () => {
                       required
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="message" className="block mb-2 text-sm font-medium">
                       Message
@@ -212,7 +212,7 @@ const Contact = () => {
                       required
                     ></textarea>
                   </div>
-                  
+
                   <button
                     type="submit"
                     className="btn-primary w-full py-3"
@@ -226,28 +226,28 @@ const Contact = () => {
           </div>
         </div>
       </section>
-      
+
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold mb-4 font-playfair">Visit Our Store</h2>
             <div className="h-1 w-24 mx-auto bg-hibhana-gold"></div>
           </div>
-          
+
           <div className="h-[400px] rounded-lg overflow-hidden shadow-lg">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.193681441284!2d72.82232561490055!3d19.05534368709772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8c3b4c05b15%3A0x2e83279560a0c4b6!2sHill%20Rd%2C%20Bandra%20West%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1650385124669!5m2!1sen!2sin" 
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen 
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.193681441284!2d72.82232561490055!3d19.05534368709772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8c3b4c05b15%3A0x2e83279560a0c4b6!2sHill%20Rd%2C%20Bandra%20West%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1650385124669!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
               loading="lazy"
               title="Hibhana Store Location"
             ></iframe>
           </div>
         </div>
       </section>
-      
+
       <WhatsAppButton />
     </div>
   );
