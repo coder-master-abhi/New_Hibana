@@ -1,18 +1,10 @@
 import { Link } from "react-router-dom";
 import { Eye, Star, Heart } from "lucide-react";
 import { useState } from "react";
+import { ProductWithId } from "../services/firestore"; // ✅ Import shared type
 
 interface ProductCardProps {
-  product: {
-    id: string;
-    name: string;
-    price: number;
-    image: string;
-    category: string;
-    rating?: number;
-    isNew?: boolean;
-    isBestSeller?: boolean;
-  };
+  product: ProductWithId; // ✅ Fix typing
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
@@ -32,7 +24,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
         </Link>
-        
+
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {product.isNew && (
@@ -41,7 +33,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div>
           )}
         </div>
-        
+
         {product.isBestSeller && (
           <div className="absolute top-3 right-3 bg-gradient-to-r from-hibhana-gold/90 to-hibhana-gold text-hibhana-black text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-sm">
             BEST SELLER
@@ -70,19 +62,19 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         </div>
       </div>
-      
+
       <div className="p-4">
         <Link to={`/product/${product.id}`} className="block">
           <h3 className="font-medium text-lg text-foreground hover:text-hibhana-gold transition-colors duration-300">
             {product.name}
           </h3>
         </Link>
-        
+
         <div className="mt-2 flex items-center justify-between">
           <p className="text-hibhana-gold font-semibold text-lg">
             ₹{product.price.toLocaleString()}
           </p>
-          
+
           {product.rating && (
             <div className="flex items-center gap-0.5">
               {[...Array(5)].map((_, i) => (

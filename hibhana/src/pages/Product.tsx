@@ -1,39 +1,65 @@
-
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProductById, getRelatedProducts } from "../data/products";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { db } from "../lib/firebase";
+
+import { ProductWithId } from "../services/firestore"; // ✅ Correct type
+
 import WhatsAppButton from "../components/WhatsAppButton";
 import ProductGallery from "../components/product/ProductGallery";
 import ProductInfo from "../components/product/ProductInfo";
+
 import RelatedProducts from "../components/product/RelatedProducts";
 import ProductSkeleton from "../components/product/ProductSkeleton";
 
-const Product = () => {
+export default function Product() {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState(null);
-  const [relatedProducts, setRelatedProducts] = useState([]);
+
+  const [product, setProduct] = useState<ProductWithId | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<ProductWithId[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
-    if (id) {
-      // Simulate loading delay for better UX
-      setTimeout(() => {
-        const productData = getProductById(id);
-        if (productData) {
+    if (!id) return;
+
+    const fetchProduct = async () => {
+      try {
+        const docRef = doc(db, "products", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const productData = { id: docSnap.id, ...docSnap.data() } as ProductWithId;
           setProduct(productData);
-          setRelatedProducts(getRelatedProducts(id, productData.category));
+
+          // ✅ Now this will not give error because productData is typed
+          const q = query(
+            collection(db, "products"),
+            where("category", "==", productData.category)
+          );
+
+          const querySnapshot = await getDocs(q);
+
+          const related = querySnapshot.docs
+            .filter((doc) => doc.id !== id)
+            .map((doc) => ({ id: doc.id, ...doc.data() } as ProductWithId));
+
+          setRelatedProducts(related);
+        } else {
+          setProduct(null);
         }
+      } catch (err) {
+        console.error("Error fetching product:", err);
+        setProduct(null);
+      } finally {
         setLoading(false);
-      }, 800);
-    }
-    
-    // Scroll to top when product changes
-    window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
+      }
+    };
+
+    fetchProduct();
   }, [id]);
 
-  if (loading) {
-    return <ProductSkeleton />;
-  }
+  if (loading) return <ProductSkeleton />;
 
   if (!product) {
     return (
@@ -52,22 +78,21 @@ const Product = () => {
     <div className="min-h-screen w-full pt-24">
       <div className="container mx-auto py-8 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Gallery */}
-          <ProductGallery 
-            images={product.images} 
-            productName={product.name} 
+          {/* ✅ Product Gallery */}
+          <ProductGallery
+            images={product.images?.length ? product.images : [product.image]}
+            productName={product.name}
           />
+          {/* ✅ Product Info */}
 
-          {/* Product Info */}
-          <ProductInfo product={product} />
+         <ProductInfo product={product!} />
         </div>
 
-        {/* Related Products */}
+        {/* ✅ Related Products */}
         <RelatedProducts products={relatedProducts} />
       </div>
+
       <WhatsAppButton />
     </div>
   );
-};
-
-export default Product;
+}

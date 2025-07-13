@@ -1,19 +1,13 @@
 import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard";
 import { ChevronRight } from "lucide-react";
+import { ProductWithId } from "../../services/firestore";
+
 
 interface RelatedProductsProps {
-  products: Array<{
-    id: string;
-    name: string;
-    price: number;
-    image: string;
-    category: string;
-    rating?: number;
-    isNew?: boolean;
-    isBestSeller?: boolean;
-  }>;
+  products: ProductWithId[];
 }
+
 
 const RelatedProducts = ({ products }: RelatedProductsProps) => {
   if (products.length === 0) return null;
