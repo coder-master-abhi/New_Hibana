@@ -75,20 +75,41 @@ export default function Product() {
   }
 
   return (
-    <div className="min-h-screen w-full pt-24">
-      <div className="container mx-auto py-8 md:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* ✅ Product Gallery */}
-          <ProductGallery
-            images={product.images?.length ? product.images : [product.image]}
-            productName={product.name}
-          />
-          {/* ✅ Product Info */}
-
-         <ProductInfo product={product!} />
+    <div className="min-h-screen w-full pt-24 bg-gradient-to-b from-background to-background/95">
+      <div className="container mx-auto px-4 sm:px-6 py-10 md:py-20">
+        {/* Breadcrumb Navigation */}
+        <nav className="mb-10 flex items-center space-x-2 text-sm font-medium text-gray-400">
+          <Link to="/" className="hover:text-hibhana-gold transition-colors duration-300">Home</Link>
+          <span>/</span>
+          <Link to="/collections" className="hover:text-hibhana-gold transition-colors duration-300">Collections</Link>
+          <span>/</span>
+          <Link 
+            to={`/collections/${product.category?.toLowerCase()}`} 
+            className="hover:text-hibhana-gold transition-colors duration-300"
+          >
+            {product.category?.charAt(0).toUpperCase() + product.category?.slice(1) || 'Products'}
+          </Link>
+          <span>/</span>
+          <span className="text-gray-300 truncate max-w-[150px]">{product.name}</span>
+        </nav>
+        
+        {/* Main Product Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
+          {/* Product Gallery */}
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <ProductGallery
+              images={product.images?.length ? product.images : [product.image]}
+              productName={product.name}
+            />
+          </div>
+          
+          {/* Product Info */}
+          <div>
+            <ProductInfo product={product!} />
+          </div>
         </div>
 
-        {/* ✅ Related Products */}
+        {/* Related Products */}
         <RelatedProducts products={relatedProducts} />
       </div>
 
