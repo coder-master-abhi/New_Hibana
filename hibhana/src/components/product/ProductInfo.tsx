@@ -7,15 +7,12 @@ interface ProductInfoProps {
   product: ProductWithId;
 }
 
-// ...imports and interfaces stay the same
-
 export const ProductInfo = ({ product }: ProductInfoProps) => {
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || "");
   const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="space-y-8">
-
       {/* Header Section */}
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-3">
@@ -79,15 +76,50 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
           ₹{product.price.toLocaleString()}
         </p>
 
-        {/* ✅ Product Description */}
         {product.description && (
           <p className="text-base text-gray-300 mt-4 leading-relaxed">
             {product.description}
           </p>
         )}
-      </div>
 
+        {/* ✅ Fabric */}
+        {product.fabric && (
+          <p className="text-sm text-muted-foreground mt-2">
+            <strong>Fabric:</strong> {product.fabric}
+          </p>
+        )}
+
+        {/* ✅ Sizes */}
+        {product.sizes && product.sizes.length > 0 && (
+          <div className="mt-4 space-y-1">
+            <p className="text-sm font-semibold text-muted-foreground">Available Sizes:</p>
+            <div className="flex flex-wrap gap-2">
+              {product.sizes.map((size, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 text-sm rounded-full border border-gray-400 text-gray-200"
+                >
+                  {size}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+        {/* ✅ Product Details */}
+        {product.details && product.details.length > 0 && (
+          <div className="mt-4 space-y-1">
+            <p className="text-sm font-semibold text-muted-foreground">Product Details:</p>
+            <ul className="list-disc list-inside space-y-1 text-gray-300 text-sm pl-2">
+              {product.details.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+      </div>
     </div>
   );
 };
+
 export default ProductInfo;

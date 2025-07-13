@@ -6,15 +6,11 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Switch } from '../components/ui/switch';
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../components/ui/select';
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from '../components/ui/select';
 import { useToast } from '../components/ui/use-toast';
 import { Textarea } from '../components/ui/textarea';
 
+// Updated type with images[]
 type ProductFormData = {
   name: string;
   price: string;
@@ -23,8 +19,16 @@ type ProductFormData = {
   collectionType: string;
   description: string;
   image: string;
+  images: string[];
   indianWear: boolean;
   westernWear: boolean;
+  rating: number;
+  sizes: string[];
+  fabric: string;
+  details: string[];
+  isNew: boolean;
+  isBestSeller: boolean;
+
 };
 
 export function AddProductForm() {
@@ -40,8 +44,16 @@ export function AddProductForm() {
     collectionType: '',
     description: '',
     image: '',
+    images: [''],
     indianWear: false,
     westernWear: false,
+    rating: 0,
+    sizes: [],
+    fabric: '',
+    details: [],
+    isNew: false,            // ✅ New field
+    isBestSeller: false,     // ✅ New field
+
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,10 +72,10 @@ export function AddProductForm() {
       await addProduct({
         ...formData,
         price: parseFloat(formData.price),
+        rating: formData.rating,
         category: formData.collections
           ? formData.collectionType.toLowerCase().replace(/\s+/g, '-')
           : '',
-
       });
 
       toast({
@@ -79,8 +91,15 @@ export function AddProductForm() {
         collectionType: '',
         description: '',
         image: '',
+        images: [''],
         indianWear: false,
         westernWear: false,
+        rating: 0,
+        sizes: [],
+        fabric: '',
+        details: [],
+        isNew: false,           
+        isBestSeller: false,     
       });
     } catch (error) {
       toast({
@@ -91,6 +110,16 @@ export function AddProductForm() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleImageChange = (index: number, value: string) => {
+    const newImages = [...formData.images];
+    newImages[index] = value;
+    setFormData((prev) => ({ ...prev, images: newImages }));
+  };
+
+  const addNewImageField = () => {
+    setFormData((prev) => ({ ...prev, images: [...prev.images, ''] }));
   };
 
   return (
@@ -195,7 +224,122 @@ export function AddProductForm() {
         />
         <Label htmlFor="westernWear">Show under Western Wear</Label>
       </div>
+      {/*  Rating */}
+      <div className="space-y-2">
+        <Label htmlFor="rating">Rating</Label>
+        <Select
+          value={formData.rating.toString()}
+          onValueChange={(value) =>
+            setFormData((prev) => ({ ...prev, rating: parseInt(value) }))
+          }
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Select rating (1–5)" />
+          </SelectTrigger>
+          <SelectContent>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <SelectItem key={num} value={num.toString()}>
+                {`${num} Star${num > 1 ? 's' : ''}`}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      {/* size */}
+      <div className="space-y-2">
+        <Label>Available Sizes</Label>
+        <div className="flex flex-wrap gap-4">
+          {["S", "M", "L", "XL", "XXL"].map((size) => (
+            <label key={size} className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                value={size}
+                checked={formData.sizes.includes(size)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setFormData((prev) => ({
+                    ...prev,
+                    sizes: e.target.checked
+                      ? [...prev.sizes, value]
+                      : prev.sizes.filter((s) => s !== value),
+                  }));
+                }}
+              />
+              <span>{size}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="fabric">Fabric</Label>
+        <Input
+          id="fabric"
+          value={formData.fabric}
+          onChange={(e) => setFormData((prev) => ({ ...prev, fabric: e.target.value }))}
+          placeholder="e.g. Cotton, Silk, Linen"
+        />
+      </div>
 
+      <div className="space-y-2">
+        <Label>Product Details (bullet points)</Label>
+        {formData.details.map((detail, index) => (
+          <div key={index} className="flex items-center gap-2">
+            <Input
+              value={detail}
+              onChange={(e) => {
+                const updated = [...formData.details];
+                updated[index] = e.target.value;
+                setFormData(prev => ({ ...prev, details: updated }));
+              }}
+              placeholder={`Detail ${index + 1}`}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => {
+                const updated = formData.details.filter((_, i) => i !== index);
+                setFormData(prev => ({ ...prev, details: updated }));
+              }}
+            >
+              ❌
+            </Button>
+          </div>
+        ))}
+
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() =>
+            setFormData(prev => ({ ...prev, details: [...prev.details, ''] }))
+          }
+        >
+          ➕ Add Detail
+        </Button>
+      </div>
+      {/* isNew */}
+      <div className="flex items-center space-x-2">
+        <Switch
+          id="isNew"
+          checked={formData.isNew}
+          onCheckedChange={(checked) =>
+            setFormData((prev) => ({ ...prev, isNew: checked }))
+          }
+        />
+        <Label htmlFor="isNew">Show as New Product</Label>
+      </div>
+      {/* Best seller */}
+      <div className="flex items-center space-x-2">
+        <Switch
+          id="isBestSeller"
+          checked={formData.isBestSeller}
+          onCheckedChange={(checked) =>
+            setFormData((prev) => ({ ...prev, isBestSeller: checked }))
+          }
+        />
+        <Label htmlFor="isBestSeller">Show as Best Seller</Label>
+      </div>
+
+      {/* ✅ Main Image */}
       <div className="space-y-2">
         <Label htmlFor="image">Image URL</Label>
         <Input
@@ -206,6 +350,23 @@ export function AddProductForm() {
           placeholder="Paste full image URL here"
           required
         />
+      </div>
+
+      {/* ✅ Multiple Images */}
+      <div className="space-y-2">
+        <Label>Other Images (optional)</Label>
+        {formData.images.map((img, index) => (
+          <Input
+            key={index}
+            type="url"
+            value={img}
+            onChange={(e) => handleImageChange(index, e.target.value)}
+            placeholder={`Image URL #${index + 1}`}
+          />
+        ))}
+        <Button type="button" variant="outline" onClick={addNewImageField}>
+          + Add another image
+        </Button>
       </div>
 
       <Button type="submit" disabled={loading} className="w-full">

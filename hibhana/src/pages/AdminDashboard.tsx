@@ -15,6 +15,8 @@ import EditCampaignForm from "./EditCampaignForm";
 import ProductList from "./ProductList";
 import EditProductForm from "./EditProductForm";
 import AdminCategoryPage from "./AdminCategoryPage";
+import { DialogClose } from "@/components/ui/dialog";
+import { X } from "lucide-react"; 
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -72,30 +74,44 @@ const AdminDashboard = () => {
                   <DialogTrigger asChild>
                     <Button>Add Product</Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-2xl">
-                    <DialogHeader>
-                      <DialogTitle>Add New Product</DialogTitle>
-                    </DialogHeader>
-                    <AddProductForm />
-                  </DialogContent>
+                  <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+  
+  {/* ✅ Custom Close Button (styled, safe) */}
+  <DialogClose asChild>
+    <button
+      className="absolute right-4 top-4 text-gray-400 hover:text-hibhana-gold font-bold text-xl transition"
+    >
+      <X className="w-6 h-6" />
+      <span className="sr-only">Close</span>
+    </button>
+  </DialogClose>
+
+  {/* Your existing header and form */}
+  <DialogHeader>
+    <DialogTitle>Add New Product</DialogTitle>
+  </DialogHeader>
+
+  <AddProductForm />
+</DialogContent>
+
                 </Dialog>
               </div>
 
-              <ProductList 
+              <ProductList
                 onEditProduct={(productId) => {
                   setEditProductId(productId);
                   setIsEditProductDialogOpen(true);
-                }} 
+                }}
               />
-              
+
               <Dialog open={isEditProductDialogOpen} onOpenChange={setIsEditProductDialogOpen}>
                 <DialogContent className="max-w-2xl">
                   <DialogHeader>
                     <DialogTitle>Edit Product</DialogTitle>
                   </DialogHeader>
                   {editProductId && (
-                    <EditProductForm 
-                      productId={editProductId} 
+                    <EditProductForm
+                      productId={editProductId}
                       onSuccess={() => {
                         setIsEditProductDialogOpen(false);
                         setEditProductId(null);
@@ -125,22 +141,22 @@ const AdminDashboard = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              
-              <CampaignList 
+
+              <CampaignList
                 onEditCampaign={(campaignId) => {
                   setEditCampaignId(campaignId);
                   setIsEditDialogOpen(true);
-                }} 
+                }}
               />
-              
+
               <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
                 <DialogContent className="max-w-2xl">
                   <DialogHeader>
                     <DialogTitle>Edit Campaign</DialogTitle>
                   </DialogHeader>
                   {editCampaignId && (
-                    <EditCampaignForm 
-                      campaignId={editCampaignId} 
+                    <EditCampaignForm
+                      campaignId={editCampaignId}
                       onSuccess={() => {
                         setIsEditDialogOpen(false);
                         setEditCampaignId(null);
