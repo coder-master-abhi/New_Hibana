@@ -41,84 +41,89 @@ export default function ProductList({ onEditProduct }: ProductListProps) {
   const renderTable = (data: typeof products, title: string) => (
     <>
       <h2 className="text-xl font-bold mt-10 mb-4">{title}</h2>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Image</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Featured</TableHead>
-            <TableHead>Collections</TableHead>
-            <TableHead>Indian Wear</TableHead>
-            <TableHead>Western Wear</TableHead>
-            <TableHead>Collection Type</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
 
-        <TableBody>
-          {data.map((product) => (
-            <TableRow key={product.id}>
-              <TableCell>
-                {product.image && (
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-16 h-16 object-cover rounded"
-                  />
-                )}
-              </TableCell>
-              <TableCell>{product.name}</TableCell>
-              <TableCell>₹{Number(product.price).toLocaleString()}</TableCell>
-              <TableCell>{product.category}</TableCell>
-              <TableCell>{product.featured ? 'Yes' : 'No'}</TableCell>
-              <TableCell>{product.collections ? 'Yes' : 'No'}</TableCell>
-              <TableCell>{!!product.indianWear ? 'Yes' : 'No'}</TableCell>
-              <TableCell>{!!product.westernWear ? 'Yes' : 'No'}</TableCell>
-              <TableCell>{product.collectionType || '—'}</TableCell>
-              <TableCell>
-                <div className="max-w-xs truncate">
-                  {product.description || '—'}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => onEditProduct(product.id)}
-                  >
-                    <Edit className="h-4 w-4 mr-2" />
-                    Edit
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={() => handleDelete(product.id)}
-                    disabled={deletingId === product.id}
-                  >
-                    {deletingId === product.id ? (
-                      <>
-                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        Deleting...
-                      </>
-                    ) : (
-                      <>
-                        <Trash2 className="h-4 w-4 mr-2" />
-                        Delete
-                      </>
-                    )}
-                  </Button>
-                </div>
-              </TableCell>
+      {/* ✅ Scrollable wrapper */}
+      <div className="overflow-x-auto w-full">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Image</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Price</TableHead>
+              <TableHead>Category</TableHead>
+              <TableHead>Featured</TableHead>
+              <TableHead>Collections</TableHead>
+              <TableHead>Indian Wear</TableHead>
+              <TableHead>Western Wear</TableHead>
+              <TableHead>Collection Type</TableHead>
+              <TableHead>Description</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+
+          <TableBody>
+            {data.map((product) => (
+              <TableRow key={product.id}>
+                <TableCell>
+                  {product.image && (
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-16 h-16 object-cover rounded"
+                    />
+                  )}
+                </TableCell>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>₹{Number(product.price).toLocaleString()}</TableCell>
+                <TableCell>{product.category}</TableCell>
+                <TableCell>{product.featured ? 'Yes' : 'No'}</TableCell>
+                <TableCell>{product.collections ? 'Yes' : 'No'}</TableCell>
+                <TableCell>{!!product.indianWear ? 'Yes' : 'No'}</TableCell>
+                <TableCell>{!!product.westernWear ? 'Yes' : 'No'}</TableCell>
+                <TableCell>{product.collectionType || '—'}</TableCell>
+                <TableCell>
+                  <div className="max-w-xs truncate">
+                    {product.description || '—'}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => onEditProduct(product.id)}
+                    >
+                      <Edit className="h-4 w-4 mr-2" />
+                      Edit
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => handleDelete(product.id)}
+                      disabled={deletingId === product.id}
+                    >
+                      {deletingId === product.id ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Deleting...
+                        </>
+                      ) : (
+                        <>
+                          <Trash2 className="h-4 w-4 mr-2" />
+                          Delete
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </>
   );
+
 
   if (loading) {
     return (

@@ -16,7 +16,11 @@ import ProductList from "./ProductList";
 import EditProductForm from "./EditProductForm";
 import AdminCategoryPage from "./AdminCategoryPage";
 import { DialogClose } from "@/components/ui/dialog";
-import { X } from "lucide-react"; 
+import { X } from "lucide-react";
+import { AddSlideForm } from "../components/AddSlideForm";
+import HeroSlideList from "../components/HeroSlideList";
+
+
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -61,11 +65,13 @@ const AdminDashboard = () => {
           </div>
 
           <Tabs defaultValue="products" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="products">Products</TabsTrigger>
               <TabsTrigger value="categories">Categories</TabsTrigger>
+              <TabsTrigger value="heroSlides">Hero Slides</TabsTrigger>
               <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
             </TabsList>
+
 
             <TabsContent value="products" className="space-y-4">
               <div className="flex justify-between items-center">
@@ -75,24 +81,24 @@ const AdminDashboard = () => {
                     <Button>Add Product</Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-  
-  {/* ✅ Custom Close Button (styled, safe) */}
-  <DialogClose asChild>
-    <button
-      className="absolute right-4 top-4 text-gray-400 hover:text-hibhana-gold font-bold text-xl transition"
-    >
-      <X className="w-6 h-6" />
-      <span className="sr-only">Close</span>
-    </button>
-  </DialogClose>
 
-  {/* Your existing header and form */}
-  <DialogHeader>
-    <DialogTitle>Add New Product</DialogTitle>
-  </DialogHeader>
+                    {/* ✅ Custom Close Button (styled, safe) */}
+                    <DialogClose asChild>
+                      <button
+                        className="absolute right-4 top-4 text-gray-400 hover:text-hibhana-gold font-bold text-xl transition"
+                      >
+                        <X className="w-6 h-6" />
+                        <span className="sr-only">Close</span>
+                      </button>
+                    </DialogClose>
 
-  <AddProductForm />
-</DialogContent>
+                    {/* Your existing header and form */}
+                    <DialogHeader>
+                      <DialogTitle>Add New Product</DialogTitle>
+                    </DialogHeader>
+
+                    <AddProductForm />
+                  </DialogContent>
 
                 </Dialog>
               </div>
@@ -125,7 +131,6 @@ const AdminDashboard = () => {
             <TabsContent value="categories" className="space-y-4">
               <AdminCategoryPage />
             </TabsContent>
-
             <TabsContent value="campaigns" className="space-y-4">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-semibold">Campaigns Management</h2>
@@ -148,7 +153,6 @@ const AdminDashboard = () => {
                   setIsEditDialogOpen(true);
                 }}
               />
-
               <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
                 <DialogContent className="max-w-2xl">
                   <DialogHeader>
@@ -165,6 +169,24 @@ const AdminDashboard = () => {
                   )}
                 </DialogContent>
               </Dialog>
+            </TabsContent>
+
+            <TabsContent value="heroSlides" className="space-y-4">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-semibold">Hero Slides</h2>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button>Add Slide</Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                      <DialogTitle>Add New Hero Slide</DialogTitle>
+                    </DialogHeader>
+                    <AddSlideForm />
+                  </DialogContent>
+                </Dialog>
+              </div>
+              <HeroSlideList />
             </TabsContent>
           </Tabs>
         </div>

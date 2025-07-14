@@ -1,79 +1,59 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { db } from "../lib/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 interface Slide {
-  id: number;
+  id: string; // Unique identifier for the slide
   title: string;
   subtitle: string;
   image: string;
   link: string;
 }
 
-const slides: Slide[] = [
-  {
-    id: 1,
-    title: "Royal Wedding Collection",
-    subtitle: "Elegance for the Modern Groom",
-    image: "https://images.unsplash.com/photo-1695857596080-a15b7d35c35b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "/collections/sherwanis",
-  },
-  {
-    id: 2,
-    title: "Menswear Essentials",
-    subtitle: "Refined Looks for Every Occasion",
-    image: "https://images.unsplash.com/photo-1566070143658-523a24797109?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "/collections/lehengas",
-  },
-  {
-    id: 3,
-    title: "Designer Indo-Western",
-    subtitle: "Fusion Fashion for Modern Celebrations",
-    image: "https://images.unsplash.com/photo-1610271283578-a595c4608e13?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8RGVzaWduZXIlMjBJbmRvJTIwV2VzdGVybiUyMG91dGZpdCUyMG1lbnxlbnwwfHwwfHx8MA%3D%3D",
-    link: "/collections/indo-western",
-  },
-  {
-    id: 4,
-    title: "Luxury Formal Wear",
-    subtitle: "Sophistication in Every Stitch",
-    image: "https://images.unsplash.com/photo-1679101893374-0785edca70e3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8THV4dXJ5JTIwRm9ybWFsJTIwV2VhciUyMG91dGZpdCUyMG1lbnxlbnwwfHwwfHx8MA%3D%3D",
-    link: "/collections/western-formals",
-  },
-  {
-    id: 5,
-    title: "Signature Men's Collection",
-    subtitle: "Unforgettable Memories, Timeless Attire",
-    image: "https://images.unsplash.com/photo-1580657018950-c7f7d6a6d990?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8U2lnbmF0dXJlJTIwTWVuJ3MlMjBDb2xsZWN0aW9uciUyMG91dGZpdCUyMG1lbnxlbnwwfHwwfHx8MA%3D%3D",
-    link: "/collections/bridal",
-  },
-];
-
 const HeroSlider = () => {
+  const [slides, setSlides] = useState<Slide[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
+  useEffect(() => {
+    const fetchSlides = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "heroSlides"));
+        const data = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Slide[];
+        setSlides(data);
+      } catch (error) {
+        console.error("Error fetching hero slides:", error);
+      }
+    };
+
+    fetchSlides();
+  }, []);
+
   const nextSlide = () => {
-    if (isTransitioning) return;
+    if (isTransitioning || slides.length === 0) return;
     setIsTransitioning(true);
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
     setTimeout(() => setIsTransitioning(false), 1000);
   };
 
   const prevSlide = () => {
-    if (isTransitioning) return;
+    if (isTransitioning || slides.length === 0) return;
     setIsTransitioning(true);
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
     setTimeout(() => setIsTransitioning(false), 1000);
   };
 
   useEffect(() => {
-    if (isHovered) return;
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
+    if (isHovered || slides.length === 0) return;
+    const interval = setInterval(() => nextSlide(), 5000);
     return () => clearInterval(interval);
-  }, [currentSlide, isHovered]);
+  }, [currentSlide, isHovered, slides.length]);
 
   return (
     <div 
@@ -89,12 +69,10 @@ const HeroSlider = () => {
               ? "opacity-100 scale-100" 
               : "opacity-0 scale-105"
           }`}
-          style={{
-            zIndex: index === currentSlide ? 1 : 0,
-          }}
+          style={{ zIndex: index === currentSlide ? 1 : 0 }}
         >
           <div
-            className="absolute inset-0 bg-center bg-cover transform transition-transform duration-1000"
+            className="absolute inset-0 bg-center bg-cover transition-transform duration-1000"
             style={{ 
               backgroundImage: `url(${slide.image})`,
               transform: index === currentSlide ? 'scale(1)' : 'scale(1.1)'

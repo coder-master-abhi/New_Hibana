@@ -7,13 +7,7 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Checkbox } from "../components/ui/checkbox";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "../components/ui/select";
+import {Select, SelectTrigger, SelectValue, SelectContent, SelectItem,} from "../components/ui/select";
 import { Textarea } from "../components/ui/textarea";
 import { Upload, X, Loader2, Check, Copy } from "lucide-react";
 import axios from "axios";
@@ -111,7 +105,7 @@ export default function EditProductForm({ productId, onSuccess }: EditProductFor
         westernWear,
         collectionType,
         description,
-        image, // ✅ no imagePublicId
+        image, 
       };
 
       await updateProduct(productId, updatedData);
@@ -127,7 +121,8 @@ export default function EditProductForm({ productId, onSuccess }: EditProductFor
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-5 max-h-[80vh] overflow-y-auto p-4 rounded">
+
       {/* Name */}
       <div>
         <Label htmlFor="name">Product Name</Label>
@@ -178,7 +173,7 @@ export default function EditProductForm({ productId, onSuccess }: EditProductFor
       </div>
 
       {/* Collection Type */}
-      <div>
+      {/* <div>
         <Label htmlFor="collectionType">Collection Type</Label>
         <Input
           id="collectionType"
@@ -186,7 +181,7 @@ export default function EditProductForm({ productId, onSuccess }: EditProductFor
           value={collectionType}
           onChange={(e) => setCollectionType(e.target.value)}
         />
-      </div>
+      </div> */}
 
       {/* Description */}
       <div>
