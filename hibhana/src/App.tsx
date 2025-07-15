@@ -44,8 +44,8 @@ const App = () => (
                   <Route path="about" element={<About />} />
                   <Route path="contact" element={<Contact />} />
                   <Route path="appointment" element={<Appointment />} />
-                  <Route path="indian-wear" element={<IndianWearPage />} /> {/* ✅ Fixed */}
-                  <Route path="western-wear" element={<WesternWearPage />} /> {/* ✅ Fixed */}
+                  <Route path="indian-wear" element={<IndianWearPage />} /> 
+                  <Route path="western-wear" element={<WesternWearPage />} /> 
                   <Route path="*" element={<NotFound />} />
                 </Route>
 

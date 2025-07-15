@@ -66,9 +66,9 @@ const AdminDashboard = () => {
 
           <Tabs defaultValue="products" className="w-full">
             <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="products">Products</TabsTrigger>
               <TabsTrigger value="categories">Categories</TabsTrigger>
-              <TabsTrigger value="heroSlides">Hero Slides</TabsTrigger>
+              <TabsTrigger value="products">Products</TabsTrigger>
+              <TabsTrigger value="heroSlides">Home Page Slides</TabsTrigger>
               <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
             </TabsList>
 
